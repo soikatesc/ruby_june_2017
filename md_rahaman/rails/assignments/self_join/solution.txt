@@ -1,0 +1,7 @@
+	1. User.first
+	2. User.first.friends
+
+exclude selected user friend:
+----------------------------
+	3. Friendship.where.not(user:User.first)
+	4. Friendship.where.not(user: User.first).joins(:user).select("*")
