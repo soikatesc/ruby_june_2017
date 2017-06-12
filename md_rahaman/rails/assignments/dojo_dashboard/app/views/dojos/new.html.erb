@@ -1,0 +1,47 @@
+<div class="container">
+	<h1>New Dojo</h1>
+	<div>
+		<% if flash[:errors] %>
+			<% flash[:errors].each do |error| %>
+				<p class="error"><%= error %></p>
+			<% end %>
+		<% end %>
+	</div>
+	 <div class="row">
+    <form class="col s6" action="/dojos" method="post">
+    	<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token %>">
+      <div class="row">
+        <div class="input-field">
+          <label for="branch">Branch</label>
+          <input id="branch" type="text" name="dojo[branch]" class="validate">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field">
+          <label for="street">Street</label>
+          <input id="street" name="dojo[street]" type="text" class="validate">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field">
+          <label for="city">City</label>
+          <input id="city" name="dojo[city]" type="text" class="validate">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field">
+          <label for="state">State</label>
+          <input id="state" name="dojo[state]" type="text" class="validate">
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit" >Submit<i class="material-icons right">send</i>
+  		</button>
+      
+    </form>
+  </div>
+  <a href="/dojos"><button class="btn pulse">Go Back</button></a>
+
+</div>
