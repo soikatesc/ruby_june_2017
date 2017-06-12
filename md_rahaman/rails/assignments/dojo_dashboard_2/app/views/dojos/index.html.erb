@@ -1,0 +1,27 @@
+<div class="container">
+	<div class="row">
+		<h1>Listing 3 Dojos: </h1>
+		<table class="bordered highlight">
+			<tr>
+				<th>Coding Dojo Branch</th>
+				<th>Street</th>
+				<th>City</th>
+				<th>State</th>
+				<th>Action</th>
+			</tr>
+
+			<% @dojos.each do |dojo| %>
+				<tr>
+					<td><%= dojo.branch %></td>
+					<td><%= dojo.street %></td>
+					<td><%= dojo.city %></td>
+					<td><%= dojo.state %></td>
+					<td><a href="">Show</a> | <a href="">Edit</a> | <a href="">Destroy</a></td>
+
+				</tr>
+			<% end %>
+
+		</table>
+	</div>
+	<a href="/dojos/new"><button class="btn pulse">New Dojo</button></a>
+</div>
