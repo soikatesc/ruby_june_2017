@@ -1,0 +1,71 @@
+<div class="container">
+	<h2>Your Gold: <%= @gold%></h2>
+	<div class="row">
+		<div class="col s3">
+			<h5>Farm</h5>
+			<p>(Earn 10-20 Golds)</p>
+			<form action="/process_money" method="post">
+				<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token %>">
+				<input type="hidden" name="building" value="farm">
+				<button class="btn waves-effect waves-light pulse" type="submit" name="action">Find Gold
+	    		<i class="material-icons right">send</i>
+	  			</button>
+  			</form>
+
+		</div>
+
+		<div class="col s3">
+			<h5>Cave</h5>
+			<p>(Earn 5-10 Golds)</p>
+			<form action="/process_money" method="post">
+				<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token %>">
+				<input type="hidden" name="building" value="cave">
+				<button class="btn waves-effect waves-light pulse" type="submit" name="action">Find Gold
+	    		<i class="material-icons right">send</i>
+	  			</button>
+  			</form>
+
+		</div>
+
+		<div class="col s3">
+			<h5>House</h5>
+			<p>(Earn 2-5 Golds)</p>
+			<form action="/process_money" method="post">
+				<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token %>">
+				<input type="hidden" name="building" value="house">
+				<button class="btn waves-effect waves-light pulse" type="submit" name="action">Find Gold
+	    		<i class="material-icons right">send</i>
+	  			</button>
+  			</form>
+
+		</div>
+
+		<div class="col s3">
+			<h5>Casino</h5>
+			<p>(Earns/takes 0-50 Golds)</p>
+			<form action="/process_money" method="post">
+				<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token %>">
+				<input type="hidden" name="building" value="casino">
+				<button class="btn waves-effect waves-light pulse" type="submit" name="action">Find Gold
+	    		<i class="material-icons right">send</i>
+	  			</button>
+  			</form>
+
+		</div>
+
+	</div>
+
+	<div class="row">
+		<div id="activities" style="overflow:auto; border:1px solid black; height:200px; padding:10px;">​
+				<!-- Show the messages by reverse to see the latest activity -->
+			<% @activities.reverse.each do |element| %>​
+				<% if element.include?("Earned") %>​
+					<p class="earned" style="color:green;"><%= element %></p>​
+				<% else %>​
+					<p class="lost" style="color:red;"><%= element %></p>​
+				<% end %>​
+			<% end %>​
+		</div>​
+	</div>
+
+</div>
