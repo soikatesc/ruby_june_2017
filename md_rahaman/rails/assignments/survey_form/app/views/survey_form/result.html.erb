@@ -1,0 +1,18 @@
+
+
+<div>
+		<% if flash[:success] %>
+	  		<div id="success">
+	  			<p><%= flash[:success] %></p>
+			</div>
+		<% end %>
+</div>
+
+<div>
+	<h1>Submitted Information: </h1>
+	<h1>Name: <%= @result['name'] %></h1>
+	<h1>Location: <%= @result['location'] %></h1>
+	<h1>Fav Language: <%= @result['fav-lang'] %></h1>
+	<h1>Comment: <%= @result['comment'] %></h1>
+
+</div>
