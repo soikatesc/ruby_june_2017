@@ -1,0 +1,69 @@
+1. Create 5 users:
+------------------
+ 	5.times{User.create(first_name: Faker::Name.first_name,last_name: Faker::Name.last_name,email_address: Faker::Internet.email)}
+
+2. Create 5 blogs:
+-------------------
+ 	5.times{Blog.create(name: Faker::Hipster.sentence,description: Faker::Hipster.sentence)}
+
+ 3. Have the first 3 blogs be owned by the first user:
+ -----------------------------------------------------
+ 	1.upto(3){ |i| Owner.create(user:User.first, blog:Blog.find(i))}
+
+ 4. Have the 4th blog you create be owned by the second user:
+ -----------------------------------------------------------
+	Owner.create(blog:Blog.find(4), user:User.second)
+
+5. Have the 5th blog you create be owned by the last user:
+---------------------------------------------------------
+	Owner.create(user:User.last, blog:Blog.fifth)
+
+6. Have the third user own all of the blogs that were created.:
+---------------------------------------------------------------
+	1.upto(Blog.all.length){ |i| Owner.create(user:User.third, blog:Blog.find(i))}
+	
+7. Have the first user create 3 posts for the blog with an id of 2. Remember that you shouldnt do Post.create(user: User.first, blog_id: 2) but more like Post.create(user: User.first, blog: Blog.find(2)). Again, you should never reference the foreign key in Rails:
+---------------------------------------------------------------
+	1.upto(3){Post.create(title: Faker::Hipster.sentence, content: Faker::Hipster.sentence, user: User.first, blog:Blog.find(2))}
+
+8. Have the second user create 5 posts for the last Blog.
+--------------------------------------------------------
+	1.upto(5){Post.create(title: Faker::Hipster.sentence, content: Faker::Hipster.sentence, user: User.second, blog:Blog.last)}
+
+9. Have the 3rd user create several posts for different blogs:
+--------------------------------------------------------------
+	1.upto(3){Post.create(title: Faker::Hipster.sentence, content: Faker::Hipster.sentence, user: User.third, blog:Blog.last)}
+10. 
+	1.upto(2){Message.create(message: Faker::Hipster.sentence, author:Faker::Name.first_name , user: User.third, post:Post.first)}
+11. 1.upto(3){Message.create(message: Faker::Hipster.sentence, author:Faker::Name.first_name , user: User.third, post:Post.last)}
+12. Owner.find_by(blog:Blog.find(2)).update(user: User.last)
+13. Post.find(2).update(content: "new content")
+14. User.find(3).blogs
+15. User.find(3).posts
+16. Blog.find(2).posts
+	Blog.find(5).posts.joins(:user).select('users.id, users.first_name, users.last_name')
+17. Blog.find(5).posts.joins(:messages).select('messages.message').joins(:user).select("users.first_name")
+	Blog.find(3).posts.includes(:user, :messages)[0].user
+18. Blog.first.owners.joins(:user).select("user.first_name")
+19. Owner.find_by(blog:Blog.find(1)).update(user: User.second)
+
+
+Polymorphism:
+-------------
+Creating a comment:
+	Comment.create(commentable: User.first, comment: "hello world")
+	Comment.create(commentable: Blog.first, comment: "hello world")
+	Comment.create(commentable: Post.first, comment: "hello world")
+	Comment.create(commentable: Message.first, comment: "hello world")
+Delete:
+	User.first.comments.destroy_all
+	Blog.first.comments.first.destroy
+	Message.first.comments.first.destroy
+	Post.first.comments.first.destroy
+Update:
+	Message.first.comments.first.update(comment: "This is a new message")
+	User.first.comments.first.update(comment: "This is a new message")
+	Blog.first.comments.first.update(comment: "This is a new message")
+	Post.first.comments.first.update(comment: "This is a new message")
+
+
